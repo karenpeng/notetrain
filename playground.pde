@@ -1,65 +1,101 @@
-ArrayList notes;
-Note n ;
-ArrayList trains;
-Train t;
-int j, interval;
-PVector station;
-Note m;
+ArrayList<Station>s;
+ArrayList<Station> s1;
+ArrayList<Station> s2;
+ArrayList<Station> s3;
+ArrayList<Station> s4;
+ArrayList<Station> s5;
+ArrayList<Train>t1;
+ArrayList<Train>t2;
+ArrayList<Train>t3;
+ArrayList<Train>t4;
+ArrayList<Train>t5;
+ArrayList<Line>l1;
+ArrayList<Line>l2;
+ArrayList<Line>l3;
+ArrayList<Line>l4;
+ArrayList<Line>l5;
 
 void setup() {
-  size(800,600);
-  background(100);
-  j=0;
-  station = new PVector(width, height);
-  interval=60;
-  
-  notes = new ArrayList<Note>();
-  notes.add(new Note(width/2, height*3/4));
-  notes.add(new Note(width/2, height/2));
-  notes.add(new Note(width/2, height/4));
-   notes.add(new Note(width/4, height/4));
-  m = (Note)notes.get(0);
+  size(1170, 740);
+  textAlign(CENTER);
+  s = new ArrayList<Station>();
+  s1 = new ArrayList<Station>();
+  s2 = new ArrayList<Station>();
+  s3 = new ArrayList<Station>();
+  s4 = new ArrayList<Station>();
+  s5 = new ArrayList<Station>();
+  t1 = new ArrayList <Train>();
+  t2 = new ArrayList <Train>();
+  t3 = new ArrayList <Train>();
+  t4 = new ArrayList <Train>();
+  t5 = new ArrayList <Train>();
 
-  trains = new ArrayList<Train>();
-  PVector inti = new PVector(width, height);
-  trains.add(new Train(inti, color(255, 0, 255)));
-  //trains.add(new Train(width,height,color(255,0,255)));
-  t = (Train)trains.get(0);
+  ////////////////////////////////////////////////////////////
+  for (int i=8; i>0; i--) {
+    s.add(new Station(width/6, height*i/8));
+  }
+
+  for (int j=3; j<6; j++) {
+    s.add(new Station(width*j/8, height*8/8));
+    s.add(new Station(width*j/8, height*7/8));
+    s.add(new Station(width*j/8, height*6/8));
+    s.add(new Station(width*j/8, height*5/8));
+    s.add(new Station(width*j/8, height*4/8));
+    s.add(new Station(width*j/8, height*3/8));
+  }
+
+  for (int k=3;k<5;k++) {
+    s.add(new Station(width*k/8, height*2/8));
+    s.add(new Station(width*k/8, height*1/8));
+  }
+
+  for (int l=5;l<9;l++) {
+    s.add(new Station(width*l/8, height*2/8));
+  }
+
+  ///////////////////////////////////////////////////////////
+  for (int m=0;m<8;m++) {
+    s1.add(s.get(m));
+  }
+
+  for (int o=8;o<13;o++) {
+    s2.add(s.get(o));
+  }
+  s2.add(s.get(26));
+  s2.add(s.get(27));
+
+  for (int q=13;q<18;q++) {
+    s3.add(s.get(q));
+  }
+  s3.add(s.get(28));
+  s3.add(s.get(29));
+
+  for (int r=18;r<23;r++) {
+    s4.add(s.get(r));
+  }
+  s4.add(s.get(30));
+  s4.add(s.get(31));
+  s4.add(s.get(32));
+  s4.add(s.get(33));
+  
+  println(s.size());
+  
+  //////////////////////////////////////////////////////////////////////////////
+  l1.add(s1,t1,color (255, 0, 255));
+  l2.add(s2,t2,color (0, 255, 255));
+  l3.add(s3,t3,color (10, 255, 10));
+  l4.add(s4,t4,color (255, 10, 10));
+ // l5.add(s5,t5,color (255, 255,0));
+  
 }
+
 void draw() {
-  background(100);
-  fill(100,10);
-  rect(0,0,width,height);
-
-  if (frameCount%interval==0) {
-    if (j<notes.size()) {
-       m = (Note)notes.get(j);
-      station=new PVector(m.x, m.y);
-      j++;
-    }
-  }
-  
-  t.seek(station);
-  t.move();
-  t.show();  
-
-  for (int i=0; i<notes.size();i++) {
-    n = (Note)notes.get(i);
-    n.display();
-  }
+  background(255);
 }
 
-void mousePressed() {
-  for (int i=0; i<notes.size();i++) {
-    n = (Note)notes.get(i);
-    n.onOff();
-  }
+void mouseClicked() {
 }
 
 void mouseDragged() {
-  for (int i=0; i<notes.size();i++) {
-    n = (Note)notes.get(i);
-    n.turn();
-  }
 }
 
