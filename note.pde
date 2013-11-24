@@ -1,23 +1,37 @@
 class Note {
   float x, y, d;
-  boolean attach=false;
+  boolean attach;
+  float theta=0;
 
-  Note() {
-    x=20;
-    y=height-20;
+  Note(float _x, float _y) {
+    x=_x;
+    y=_y;
     d=30;
+    attach=false;
   }
 
   void hover() {
   }
 
-  Train pickTrain(Line l) {
+  void drag() {
+    if (dist(mouseX, mouseY, x, y)<d*2) {
+      x=mouseX;
+      y=mouseY;
+    }
+  }
+
+  void jigger() {    
+    d=sin(theta)*4+30;
+    theta+=.1;
+  }
+
+  Train pickTrain(Line ll) {
     //all the trains in this line  
     if (!attach) {
-      for (int i= 0; i<l.trains.size()-1;i++) {
-        if (l.trains.get(i).history.size()<20) {
+      for (int i= 0; i<ll.trains.size()-1;i++) {
+        if (ll.trains.get(i).history.size()<20) {
           attach=true;
-          return l.trains.get(i);
+          return ll.trains.get(i);
         }
       }
     }

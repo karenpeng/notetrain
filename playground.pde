@@ -11,7 +11,7 @@ Note n;
 
 void setup() {
   size(1200, 800);
-  frameRate(40);
+  //frameRate(40);
   textAlign(CENTER);
   s = new ArrayList<Station>();
   s1 = new ArrayList<Station>();
@@ -21,7 +21,7 @@ void setup() {
   s5 = new ArrayList<Station>();
   t = new ArrayList <Train>();
   l=new ArrayList<Line>();
-  n= new Note();
+  n= new Note(100, height-100);
 
   ////////////////////////////////////////////////////////////
   for (int i=7; i>=0; i--) {
@@ -101,23 +101,30 @@ void draw() {
 
   // note pick which train to get on
   // if already in a trian, return null
-  Train t = n.pickTrain(l.get(0));
-  if (t != null) {
-    t.getOn(n);
+
+  for (Line ll:l) {
+    float dis=dist(ll.stations.get(0).x, ll.stations.get(0).y, n.x, n.y);
+    if (!n.attach && dis<n.d) {
+      Train t = n.pickTrain(ll);
+      if (t != null) {
+        t.getOn(n);
+      }
+    }
+    n.jigger();
+    n.appear();
   }
-  n.appear();
-  
 }
 
-void mousePressed() {
-  for (Line ll: l) {
-    ll.clickStation();
+  void mousePressed() {
+    for (Line ll: l) {
+      ll.clickStation();
+    }
   }
-}
 
-void mouseDragged() {
-  for (Line ll: l) {
-    ll.dragStation();
+  void mouseDragged() {
+    for (Line ll: l) {
+      ll.dragStation();
+    }
+    n.drag();
   }
-}
 

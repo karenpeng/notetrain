@@ -3,12 +3,14 @@ class Line {
   ArrayList<Train> trains/*= new ArrayList<Train>()*/;
   color c;
   int maxTrainNums;
+  Station start;
 
   Line(ArrayList<Station> _s, ArrayList<Train> _t, color _c) {
     stations=_s;
     trains=_t;
     c = _c;
     maxTrainNums = 8;
+    start = _s.get(0);
   }
 
   void addTrain() {
@@ -16,8 +18,8 @@ class Line {
       return;
     }
     Train t;
-    Station startStation = stations.get(0);
-    t = new Train(new PVector(startStation.x, startStation.y), c);
+    //Station startStation = stations.get(0);
+    t = new Train(new PVector(start.x, start.y), c);
     t.setLine(stations);
     trains.add(t);
   }
@@ -41,7 +43,7 @@ class Line {
     for (int i = 0; i < stations.size() - 1; i++) {
       n = stations.get(i);
       m = stations.get(i+1);
-      stroke(c,100);
+      stroke(c, 100);
       strokeWeight(18);
       line(n.x, n.y, m.x, m.y);
     }
@@ -67,5 +69,6 @@ class Line {
       s.intersect();
     }
   }
+
 }
 
