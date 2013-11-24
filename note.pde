@@ -1,7 +1,6 @@
 class Note {
   float x, y, d;
   boolean attach=false;
-  int whichTrain;
 
   Note() {
     x=20;
@@ -12,30 +11,30 @@ class Note {
   void hover() {
   }
 
-  void follow(Line l) {
+  Train pickTrain(Line l) {
     //all the trains in this line  
     if (!attach) {
       for (int i= 0; i<l.trains.size()-1;i++) {
         if (l.trains.get(i).history.size()<20) {
-          //x=l.trains.get(i).pos.x;
-          //y=l.trains.get(i).pos.y;
-          whichTrain=i;
           attach=true;
-          //break;
+          return l.trains.get(i);
         }
       }
     }
-    else {
-      x=l.trains.get(whichTrain).pos.x;
-      y=l.trains.get(whichTrain).pos.y;
+    return null;
+  }
 
-      if (l.trains.get(whichTrain).arrived) {
-        attach=false;
-      }
+  void follow (PVector trainPos) {
+    if (attach) {
+      x=trainPos.x;
+      y=trainPos.y;
     }
-
-
-    //}
+  }
+  void unfollow() {
+    attach = false;
+    // move the note out of screen
+    x = -100;
+    y = -100;
   }
 
   void appear() {
