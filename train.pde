@@ -9,6 +9,7 @@ class Train {
   ArrayList<Station> stations; 
   boolean arrived;
   boolean headArrived;
+  ArrayList<Note> notes;  //passengers in this train
 
   Train(PVector _p, color _c) {
     pos=_p;
@@ -19,7 +20,8 @@ class Train {
     d=20;
     c=_c;
     history = new ArrayList<PVector>();
-    stations= new ArrayList<Station>(); 
+    stations = new ArrayList<Station>(); 
+    notes = new ArrayList<Note>();
     nextIndex = 0;
     arrived = false;
     headArrived = false;
@@ -33,6 +35,10 @@ class Train {
     if (history.size() > 20) {
       history.remove(0);
     }
+    //move the passengers
+    for (Note n: notes) {
+      n.follow(pos);
+    }    
   }
 
   void appF(PVector f) {
@@ -69,11 +75,18 @@ class Train {
       float distance = dist(next.x, next.y, lastHis.x, lastHis.y);
       if (distance < 1) {
         arrived = true;
+        for (Note n : notes) {
+          n.unfollow(); //get down the train
+        }
       }
     }
     if (nextIndex < stations.size() - 1 && next.trigger(pos)) {
       nextIndex++;
     }
+  }
+
+  void getOn(Note n) {
+    notes.add(n);
   }
 
   void setLine(ArrayList _s) {

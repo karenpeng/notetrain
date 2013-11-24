@@ -99,7 +99,12 @@ void draw() {
     ll.showStation();
   }
 
-  n.follow(l.get(0));
+  // note pick which train to get on
+  // if already in a trian, return null
+  Train t = n.pickTrain(l.get(0));
+  if (t != null) {
+    t.getOn(n);
+  }
   n.appear();
   
 }
