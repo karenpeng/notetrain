@@ -9,6 +9,7 @@ class Station {
   float dis;
   int countPlus;
   float lastX, lastY;
+  int counter;
 
   Station(float _x, float _y) {
     x=_x;
@@ -23,6 +24,7 @@ class Station {
     //dis = dist(mouseX, mouseY, _x, _y);
     lastX=_x;
     lastY=_y-32;
+    counter=0;
   }
 
   void onOff() {  
@@ -70,7 +72,16 @@ class Station {
         return false;
         //trigger=false;
       }
-
+  }
+  
+  void countTrigger(){
+    if(trigger){
+      counter++;
+    }
+    if(counter>=10){
+      trigger=false;
+      counter=0;
+    }
   }
 
   void intersect() {
@@ -122,6 +133,7 @@ class Station {
        ellipse(x, y, d, d);
        text("0", x, y);
        if (hover) {*/
+      strokeWeight(2);
       stroke(0);
       fill(255);
       ellipse(x, y, d, d);
@@ -139,8 +151,12 @@ class Station {
       if (trigger) {
         d=30;
       }
+      if(!trigger){
+        d=25;
+      }
     }
     if (!on) {
+      strokeWeight(2);
       stroke(0);
       fill(255);
       //noFill();

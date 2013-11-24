@@ -1,6 +1,6 @@
 class Line {
-  ArrayList<Station> stations= new ArrayList<Station>();
-  ArrayList<Train> trains= new ArrayList<Train>();
+  ArrayList<Station> stations/*= new ArrayList<Station>()*/;
+  ArrayList<Train> trains/*= new ArrayList<Train>()*/;
   color c;
   int maxTrainNums;
 
@@ -8,7 +8,7 @@ class Line {
     stations=_s;
     trains=_t;
     c = _c;
-    maxTrainNums = 10;
+    maxTrainNums = 8;
   }
 
   void addTrain() {
@@ -41,7 +41,7 @@ class Line {
     for (int i = 0; i < stations.size() - 1; i++) {
       n = stations.get(i);
       m = stations.get(i+1);
-      stroke(c);
+      stroke(c,100);
       strokeWeight(18);
       line(n.x, n.y, m.x, m.y);
     }
@@ -50,6 +50,7 @@ class Line {
   void showStation() {
     for (Station s: stations) {
       s.hover();
+      s.countTrigger();
       s.display();
     }
   }
@@ -61,7 +62,7 @@ class Line {
     }
   }
 
-  void DragStation() {
+  void dragStation() {
     for (Station s: stations) {
       s.intersect();
     }
