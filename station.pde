@@ -4,12 +4,12 @@ class Station {
   boolean on;
   boolean hover;
   boolean trigger;
-  boolean longer;
   boolean intersect;
   float dis;
   int countPlus;
   float lastX, lastY;
   int counter;
+  //color c;
 
   Station(float _x, float _y) {
     x=_x;
@@ -18,19 +18,25 @@ class Station {
     hover=false;
     on=false;
     trigger=false;
-    longer=false;
     intersect=false;
     countPlus=0;
     //dis = dist(mouseX, mouseY, _x, _y);
     lastX=_x;
     lastY=_y-32;
     counter=0;
+    //c=_c;
   }
 
   void onOff() {  
     dis = dist(mouseX, mouseY, x, y);
     if (/*mousePressed && */dis<=d/2) {  
       on = !on;
+    }
+    if (on) {
+      //d=d+countPlus*.1;
+    }
+    else {
+      d=25;
     }
   }
 
@@ -43,7 +49,7 @@ class Station {
     else {
      hover = false;
      }*/
-    if (hover && dis>d*1.5) {
+    if (hover && dis>d*2) {
       hover = false;
     }
   }
@@ -58,27 +64,28 @@ class Station {
       if (pitch2<d/4) {
         countPlus-=1;
       }
+      println(d);
     }
   }
 
   boolean trigger(PVector p) {
     //if (on) {
-      float triggerDis=dist(p.x, p.y, x, y);
-      if (triggerDis<1) {
-        trigger=true;
-        return true;
-      }//}
-      else {
-        return false;
-        //trigger=false;
-      }
+    float triggerDis=dist(p.x, p.y, x, y);
+    if (triggerDis<1) {
+      trigger=true;
+      return true;
+    }//}
+    else {
+      return false;
+      //trigger=false;
+    }
   }
-  
-  void countTrigger(){
-    if(trigger){
+
+  void countTrigger() {
+    if (trigger) {
       counter++;
     }
-    if(counter>=10){
+    if (counter>=10) {
       trigger=false;
       counter=0;
     }
@@ -96,7 +103,8 @@ class Station {
     }
   }
 
-  void display() {
+  void display(color c) {
+    textAlign(CENTER);
     //println(dis);
     if (intersect) {
       fill(0);
@@ -123,24 +131,25 @@ class Station {
       vertex(-6, 6);
       endShape(CLOSE);
       popMatrix();
+      stroke(0);
       strokeWeight(2);
       line(x, y, lastX, lastY);
     }
     if (on) {
-      /*
-      stroke(0);
-       fill(255);
-       ellipse(x, y, d, d);
-       text("0", x, y);
-       if (hover) {*/
-      strokeWeight(2);
-      stroke(0);
-      fill(255);
-      ellipse(x, y, d, d);
-      fill(0);
-      String t = Integer.toString(countPlus);
-      text(t, x, y+5);
+      noStroke();
+      if (!hover) {
+        fill(0);
+        ellipse(x, y, d, d);
+        fill(255);
+        String t = Integer.toString(countPlus);
+        text(t, x, y+5);
+      }
       if (hover) {
+        fill(c);
+        ellipse(x, y, d, d);
+        fill(255);
+        String t = Integer.toString(countPlus);
+        text(t, x, y+5);
         fill(0);
         ellipse(x-d, y, d/2, d/2);
         ellipse(x+d, y, d/2, d/2);
@@ -151,19 +160,20 @@ class Station {
       if (trigger) {
         d=30;
       }
-      if(!trigger){
+      if (!trigger) {
         d=25;
       }
     }
     if (!on) {
-      strokeWeight(2);
-      stroke(0);
-      fill(255);
+      //strokeWeight(2);
+      //stroke(c);
+      noStroke();
+      fill(0);
       //noFill();
       ellipse(x, y, d, d);
-      fill(0);
+      fill(255);
       //textSize(10);
-      text("Off", x, y+5);
+      text("off", x, y+5);
     }
   }
 }

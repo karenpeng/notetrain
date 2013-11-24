@@ -52,7 +52,7 @@ class Note {
   }
 
   void appear() {
-    fill(160); 
+    fill(255,255,0); 
     ellipse(x, y, d, d);
   }
 }

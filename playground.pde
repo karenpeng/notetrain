@@ -11,7 +11,7 @@ Note n;
 
 void setup() {
   size(1200, 800);
-  //frameRate(40);
+  frameRate(40);
   textAlign(CENTER);
   s = new ArrayList<Station>();
   s1 = new ArrayList<Station>();
@@ -24,8 +24,8 @@ void setup() {
   n= new Note(100, height-100);
 
   ////////////////////////////////////////////////////////////
-  for (int i=7; i>=0; i--) {
-    s.add(new Station(width/6, height*i/8));
+  for (int i=9; i>=0; i--) {
+    s.add(new Station(width/5, height*i/10));
   }
 
   for (int j=3; j<6; j++) {
@@ -48,25 +48,26 @@ void setup() {
 
   //s.get(21).intersect=true;
   ///////////////////////////////////////////////////////////
-  for (int m=0;m<8;m++) {
+  for (int m=0;m<10;m++) {
     s1.add(s.get(m));
   }
 
-  for (int o=8;o<13;o++) {
+  for (int o=11;o<13;o++) {
     s2.add(s.get(o));
   }
   s2.add(s.get(23));
   s2.add(s.get(24));
   s2.add(s.get(25));
 
-  for (int q=11;q<18;q++) {
+  for (int q=13;q<18;q++) {
     s3.add(s.get(q));
   }
   s3.add(s.get(26));
   s3.add(s.get(27));
   s3.add(s.get(28));
   s3.get(1).intersect=true;
-  s4.add(s3.get(2));
+
+  // s4.add(s3.get(2));
 
   for (int r=18;r<23;r++) {
     s4.add(s.get(r));
@@ -115,16 +116,16 @@ void draw() {
   }
 }
 
-  void mousePressed() {
-    for (Line ll: l) {
-      ll.clickStation();
-    }
+void mousePressed() {
+  for (Line ll: l) {
+    ll.clickStation();
   }
+}
 
-  void mouseDragged() {
-    for (Line ll: l) {
-      ll.dragStation();
-    }
-    n.drag();
+void mouseDragged() {
+  for (Line ll: l) {
+    ll.dragStation();
   }
+  n.drag();
+}
 

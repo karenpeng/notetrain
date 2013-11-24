@@ -9,7 +9,7 @@ class Line {
     stations=_s;
     trains=_t;
     c = _c;
-    maxTrainNums = 8;
+    maxTrainNums = 20;
     start = _s.get(0);
   }
 
@@ -43,8 +43,8 @@ class Line {
     for (int i = 0; i < stations.size() - 1; i++) {
       n = stations.get(i);
       m = stations.get(i+1);
-      stroke(c, 100);
-      strokeWeight(18);
+      stroke(c);
+      strokeWeight(8);
       line(n.x, n.y, m.x, m.y);
     }
   }
@@ -53,7 +53,7 @@ class Line {
     for (Station s: stations) {
       s.hover();
       s.countTrigger();
-      s.display();
+      s.display(c);
     }
   }
 
