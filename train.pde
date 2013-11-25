@@ -15,8 +15,8 @@ class Train {
     pos=_p;
     vel=new PVector (0.0, 0.0);
     acc=new PVector (0, 0);
-    maxspeed = 4;
-    maxforce = 4;
+    maxspeed = 3;
+    maxforce = 2;
     d=20;
     c=_c;
     history = new ArrayList<PVector>();
@@ -32,7 +32,7 @@ class Train {
     vel.add(acc);
     acc.mult(0);
     history.add(pos.get());
-    if (history.size() > 20) {
+    if (history.size() > 40) {
       history.remove(0);
     }
     //move the passengers

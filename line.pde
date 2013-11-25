@@ -10,7 +10,7 @@ class Line {
     trains=_t;
     c = _c;
     maxTrainNums = 20;
-    start = _s.get(0);
+   // start = _s.get(0);
   }
 
   void addTrain() {
@@ -18,7 +18,7 @@ class Line {
       return;
     }
     Train t;
-    //Station startStation = stations.get(0);
+    Station start = stations.get(0);
     t = new Train(new PVector(start.x, start.y), c);
     t.setLine(stations);
     trains.add(t);

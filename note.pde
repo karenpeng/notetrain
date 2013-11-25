@@ -28,7 +28,7 @@ class Note {
   Train pickTrain(Line ll) {
     //all the trains in this line  
     if (!attach) {
-      for (int i= 0; i<ll.trains.size()-1;i++) {
+      for (int i= 0; i<ll.trains.size();i++) {
         if (ll.trains.get(i).history.size()<20) {
           attach=true;
           return ll.trains.get(i);

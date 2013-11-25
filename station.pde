@@ -14,7 +14,7 @@ class Station {
   Station(float _x, float _y) {
     x=_x;
     y=_y;
-    d=25;
+    d=22;
     hover=false;
     on=false;
     trigger=false;
@@ -33,10 +33,10 @@ class Station {
       on = !on;
     }
     if (on) {
-      //d=d+countPlus*.1;
+      d=d+countPlus*.2;
     }
     else {
-      d=25;
+      d=22;
     }
   }
 
@@ -158,10 +158,10 @@ class Station {
         text("-", x+d, y+5);
       }
       if (trigger) {
-        d=30;
+        //d=30;
       }
       if (!trigger) {
-        d=25;
+        //d=25;
       }
     }
     if (!on) {

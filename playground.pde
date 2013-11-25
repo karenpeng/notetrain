@@ -6,13 +6,15 @@ ArrayList<Station> s4;
 ArrayList<Station> s5;
 ArrayList<Train>t;
 ArrayList<Line>l;
+int between;
 
 Note n;
 
 void setup() {
-  size(1200, 800);
+  size(900, 700);
   frameRate(40);
   textAlign(CENTER);
+  between=60;
   s = new ArrayList<Station>();
   s1 = new ArrayList<Station>();
   s2 = new ArrayList<Station>();
@@ -21,63 +23,34 @@ void setup() {
   s5 = new ArrayList<Station>();
   t = new ArrayList <Train>();
   l=new ArrayList<Line>();
-  n= new Note(100, height-100);
+  n= new Note(50, height-50);
 
   ////////////////////////////////////////////////////////////
-  for (int i=9; i>=0; i--) {
-    s.add(new Station(width/5, height*i/10));
+  for (int i=0; i<=width; i+=between) {
+    for (int j=0; j<height-between; j+=between) {
+      s.add(new Station(i, j));
+    }
   }
-
-  for (int j=3; j<6; j++) {
-    s.add(new Station(width*j/8, height*7/8));
-    s.add(new Station(width*j/8, height*6/8));
-    s.add(new Station(width*j/8, height*5/8));
-    s.add(new Station(width*j/8, height*4/8));
-    s.add(new Station(width*j/8, height*3/8));
-  }
-
-  for (int k=3;k<5;k++) {
-    s.add(new Station(width*k/8, height*2/8));
-    s.add(new Station(width*k/8, height*1/8));
-    s.add(new Station(width*k/8, -height*1/8));
-  }
-
-  for (int l=5;l<9;l++) {
-    s.add(new Station(width*l/8, height*2/8));
-  }
-
-  //s.get(21).intersect=true;
   ///////////////////////////////////////////////////////////
-  for (int m=0;m<10;m++) {
-    s1.add(s.get(m));
+  int [] lineOne = {21, 20, 30, 41, 52, 51, 40, 39, 38, 37, 36, 25, 24, 23, 22, 22};
+  for (int i=0;i<lineOne.length-1;i++) {
+    s1.add(s.get(lineOne[i]));
   }
 
-  for (int o=11;o<13;o++) {
-    s2.add(s.get(o));
+  int [] lineTwo = {164, 163, 162, 161, 160, 149, 138, 127, 116, 105, 94, 83, 72, 61, 60, 59, 48, 37, 26, 15, 14, 13, 12, 1, 1};
+  for (int i=0;i<lineTwo.length-1;i++) {
+    s2.add(s.get(lineTwo[i]));
   }
-  s2.add(s.get(23));
-  s2.add(s.get(24));
-  s2.add(s.get(25));
 
-  for (int q=13;q<18;q++) {
-    s3.add(s.get(q));
+  int [] lineThree = {43, 54, 65, 76, 75, 74, 73, 72, 71, 70, 69, 68, 78, 78};
+  for (int i=0;i<lineThree.length-1;i++) {
+    s3.add(s.get(lineThree[i]));
   }
-  s3.add(s.get(26));
-  s3.add(s.get(27));
-  s3.add(s.get(28));
-  s3.get(1).intersect=true;
 
-  // s4.add(s3.get(2));
-
-  for (int r=18;r<23;r++) {
-    s4.add(s.get(r));
+  int [] lineFour = {87, 79, 80, 81, 82, 83, 84, 85, 86, 87};
+  for (int i=0;i<lineFour.length-1;i++) {
+    s4.add(s.get(lineFour[i]));
   }
-  s4.add(s.get(29));
-  s4.add(s.get(30));
-  s4.add(s.get(31));
-  s4.add(s.get(32));
-
-  println(s.size());
 
   //////////////////////////////////////////////////////////////////////////////
 
@@ -93,7 +66,7 @@ void draw() {
 
   for (Line ll: l) {
     ll.drawLine();
-    if (frameCount==0 || frameCount%40==0) {
+    if (frameCount==0 || frameCount%60==0) {
       ll.addTrain();
     }
     ll.moveTrain();
@@ -113,6 +86,15 @@ void draw() {
     }
     n.jigger();
     n.appear();
+  }
+
+  for (int i=0; i<=14; i++) {
+    for (int j=0; j<12; j++) {
+      int s =i*11+j;
+      String t = Integer.toString(s);
+      fill(0);
+      text(t, i*between, j*between+24);
+    }
   }
 }
 
