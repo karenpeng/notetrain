@@ -146,7 +146,7 @@ void draw() {
   }
   n.jigger();
   n.appear();    
-
+/*
   for (int i=0; i<=14; i++) {
     for (int j=0; j<12; j++) {
       int s =i*11+j;
@@ -155,10 +155,11 @@ void draw() {
       text(t, i*between, j*between+24);
     }
   }
+  */
   float s =frameRate;
   String t = Float.toString(s);
   fill(0);
-  text(t, 100, height-40);
+  text(t, width-100, 40);
 }
 
 void mousePressed() {
