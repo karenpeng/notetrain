@@ -12,6 +12,7 @@ int between;
 
 Note n;
 
+//record how many line pass by each station
 HashMap<Integer,Integer> stationsMap = new HashMap<Integer,Integer>();
 
 void initLine(int [] line, ArrayList<Station> stations) {

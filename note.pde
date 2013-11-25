@@ -2,7 +2,7 @@ class Note {
   float x, y, d;
   boolean attach;
   float theta=0;
-  Line lastLine;
+  Line lastLine;    //record the last line
   int passedStation=0;
 
   Note(float _x, float _y) {
@@ -30,11 +30,11 @@ class Note {
   Train pickTrain(Line ll, Station station) {
     //all the trains in this line  
     if (!attach) {
+      //when transfer, do not get on the same line
       if (ll == lastLine) {
         return null;
       }
       for (int i= 0; i<ll.trains.size();i++) {
-        //do not get on the same line
         if (ll.trains.get(i).atStation(station)) {
           attach=true;
           lastLine = ll;

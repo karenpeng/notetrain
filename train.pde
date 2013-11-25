@@ -82,6 +82,7 @@ class Train {
       }
     }
     if (nextIndex < stations.size() - 1 && next.trigger(pos)) {
+      //each passager.passedStation + 1
       for (Note n : notes) {
         n.passedStation++;
       }
@@ -93,6 +94,7 @@ class Train {
     }
   }
 
+  //let passager's transfer
   void transfer() {
     for (int i = 0; i < notes.size(); i++) {
       //TODO: change the transfer rate
@@ -106,6 +108,7 @@ class Train {
     }
   }
 
+  //check the train arrived the station
   boolean atStation(Station station) {
     float distance = dist(station.x, station.y, pos.x, pos.y);
     return distance < 3;
