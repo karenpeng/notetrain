@@ -10,6 +10,8 @@ class Station {
   float lastX, lastY;
   int counter;
   boolean isTransferStation;
+  float ang;
+  float a, b;
   //color c;
 
   Station(float _x, float _y) {
@@ -26,7 +28,10 @@ class Station {
     lastY=_y-32;
     counter=0;
     isTransferStation=false;
+    ang=0;
     //c=_c;
+    a=0;
+    b=2*PI;
   }
 
   void onOff() {  
@@ -97,7 +102,7 @@ class Station {
     if (intersect) {
       float intersectDis = dist(x, y, mouseX, mouseY);
       //println(intersect);
-      if (intersectDis<=46) {
+      if (intersectDis<=30) {
         //println("yeah");
         lastX=x+32*(mouseX-x)/ intersectDis;
         lastY=y+32*(mouseY-y)/ intersectDis;
@@ -105,28 +110,29 @@ class Station {
     }
   }
 
+
   void display(color c) {
     textAlign(CENTER);
     //println(dis);
+    //fill(0);    
+
     if (intersect) {
-      fill(0);
-      pushMatrix();
-      translate(lastX, lastY);
+      //lastX=constrain(lastX,x-d,x);
       if (lastX-x>=0) {
         float dd = asin((lastY-y)/dist(lastX, lastY, x, y));
-        float ang=map(dd, -PI/2, PI/2, 0, PI);
-        rotate(ang);
+        ang=map(dd, -PI/2, PI/2, 0, PI);
         //println("right"+ang+" "+dd);
         //println(dd);
       }
       else {
         float dd = asin((lastY-y)/dist(lastX, lastY, x, y));
-        float ang=map(dd, PI/2, -PI/2, PI, PI*2);
-        rotate(ang);
+        ang=map(dd, PI/2, -PI/2, PI, PI*2);
         //println("left"+ang+" "+dd);
         //println(dd);
       }
-
+      pushMatrix();
+      translate(lastX, lastY);
+      rotate(ang);
       beginShape();    
       vertex(6, 6);
       vertex(0, -6);
@@ -179,3 +185,4 @@ class Station {
     }
   }
 }
+
