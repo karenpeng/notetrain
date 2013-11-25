@@ -2,6 +2,8 @@ class Note {
   float x, y, d;
   boolean attach;
   float theta=0;
+  Line lastLine;
+  int passedStation=0;
 
   Note(float _x, float _y) {
     x=_x;
@@ -28,9 +30,14 @@ class Note {
   Train pickTrain(Line ll, Station station) {
     //all the trains in this line  
     if (!attach) {
+      if (ll == lastLine) {
+        return null;
+      }
       for (int i= 0; i<ll.trains.size();i++) {
+        //do not get on the same line
         if (ll.trains.get(i).atStation(station)) {
           attach=true;
+          lastLine = ll;
           return ll.trains.get(i);
         }
       }
@@ -46,9 +53,7 @@ class Note {
   }
   void unfollow() {
     attach = false;
-    // move the note out of screen
-    x = -100;
-    y = -100;
+    passedStation = 0;
   }
 
   void appear() {

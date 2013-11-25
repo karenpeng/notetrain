@@ -75,13 +75,34 @@ class Train {
       float distance = dist(next.x, next.y, lastHis.x, lastHis.y);
       if (distance < 1) {
         arrived = true;
-        for (Note n : notes) {
-          n.unfollow(); //get down the train
+        for (int i = 0; i < notes.size(); i++) {
+          (notes.get(i)).unfollow();//get down the train
+          notes.remove(i);
         }
       }
     }
     if (nextIndex < stations.size() - 1 && next.trigger(pos)) {
+      for (Note n : notes) {
+        n.passedStation++;
+      }
+      if (stations.get(nextIndex).isTransferStation) {
+        //try to transfer
+        transfer();
+      }
       nextIndex++;
+    }
+  }
+
+  void transfer() {
+    for (int i = 0; i < notes.size(); i++) {
+      //TODO: change the transfer rate
+      if (random(0, 1) < 1) {
+        Note n = notes.get(i);
+        if (n.passedStation > 1) {
+          notes.get(i).unfollow();
+          notes.remove(i);  
+        }
+      }
     }
   }
 
