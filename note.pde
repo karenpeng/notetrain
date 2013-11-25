@@ -2,6 +2,8 @@ class Note {
   float x, y, d;
   boolean attach;
   float theta=0;
+  Line lastLine;    //record the last line
+  int passedStation=0;
 
   Note(float _x, float _y) {
     x=_x;
@@ -25,12 +27,17 @@ class Note {
     theta+=.1;
   }
 
-  Train pickTrain(Line ll) {
+  Train pickTrain(Line ll, Station station) {
     //all the trains in this line  
     if (!attach) {
+      //when transfer, do not get on the same line
+      if (ll == lastLine) {
+        return null;
+      }
       for (int i= 0; i<ll.trains.size();i++) {
-        if (ll.trains.get(i).history.size()<20) {
+        if (ll.trains.get(i).atStation(station)) {
           attach=true;
+          lastLine = ll;
           return ll.trains.get(i);
         }
       }
@@ -46,13 +53,13 @@ class Note {
   }
   void unfollow() {
     attach = false;
-    // move the note out of screen
-    x = -100;
-    y = -100;
+    passedStation = 0;
   }
 
   void appear() {
-    fill(255,255,0); 
+    strokeWeight(2);
+    stroke(0);
+    fill(255); 
     ellipse(x, y, d, d);
   }
 }

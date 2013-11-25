@@ -9,6 +9,7 @@ class Station {
   int countPlus;
   float lastX, lastY;
   int counter;
+  boolean isTransferStation;
   //color c;
 
   Station(float _x, float _y) {
@@ -24,6 +25,7 @@ class Station {
     lastX=_x;
     lastY=_y-32;
     counter=0;
+    isTransferStation=false;
     //c=_c;
   }
 
@@ -171,10 +173,9 @@ class Station {
       fill(0);
       //noFill();
       ellipse(x, y, d, d);
-      fill(255);
+      //fill(255);
       //textSize(10);
-      text("off", x, y+5);
+      //text("off", x, y+5);
     }
   }
 }
-
