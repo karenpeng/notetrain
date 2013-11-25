@@ -88,12 +88,12 @@ class Train {
       }
       if (stations.get(nextIndex).isTransferStation) {
         //try to transfer
-       // transfer();
+        transfer();
       }
       nextIndex++;
     }
   }
-/*
+
   //let passager's transfer
   void transfer() {
     for (int i = 0; i < notes.size(); i++) {
@@ -107,7 +107,7 @@ class Train {
       }
     }
   }
-*/
+
   //check the train arrived the station
   boolean atStation(Station station) {
     float distance = dist(station.x, station.y, pos.x, pos.y);

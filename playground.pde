@@ -13,7 +13,7 @@ int between;
 Note n;
 
 //record how many line pass by each station
-HashMap<Integer, Integer> stationsMap = new HashMap<Integer, Integer>();
+HashMap<Integer,Integer> stationsMap = new HashMap<Integer,Integer>();
 
 void initLine(int [] line, ArrayList<Station> stations) {
   for (int i=0;i<line.length;i++) {
@@ -23,8 +23,7 @@ void initLine(int [] line, ArrayList<Station> stations) {
     Integer nums = stationsMap.get(stationIndex);
     if (nums == null) {
       stationsMap.put(stationIndex, 1);
-    } 
-    else {
+    } else {
       stationsMap.put(stationIndex, nums + 1);
     }
   }
@@ -51,7 +50,6 @@ void setup() {
       s.add(new Station(i, j));
     }
   }
-
   ///////////////////////////////////////////////////////////
 
   int [] lineOne = {
@@ -84,18 +82,6 @@ void setup() {
   };
   initLine(lineSix, s6);
 
-  s.get(37).intersect=true;
-  s.get(38).intersect=true;  
-  s.get(60).intersect=true;
-  s.get(71).intersect=true;
-  s.get(72).intersect=true;
-  s.get(93).intersect=true;
-  s.get(94).intersect=true;
-  s.get(113).intersect=true;
-  s.get(115).intersect=true;
-  s.get(116).intersect=true;
-  s.get(118).intersect=true;
-
   for (Map.Entry me : stationsMap.entrySet()) {
     //if more than one line pass by, set this station to a transfer station
     if ((Integer)(me.getValue()) > 1) {
@@ -120,7 +106,7 @@ void draw() {
 
   for (Line ll: l) {
     ll.drawLine();
-    if ( frameCount%140==0) {
+    if ( frameCount%60==0) {
       ll.addTrain();
     }
     ll.moveTrain();
@@ -144,15 +130,15 @@ void draw() {
   }
   n.jigger();
   n.appear();    
-/*
+  /*
   for (int i=0; i<=14; i++) {
-    for (int j=0; j<12; j++) {
-      int s =i*11+j;
-      String t = Integer.toString(s);
-      fill(0);
-      text(t, i*between, j*between+24);
-    }
-  }*/
+   for (int j=0; j<12; j++) {
+   int s =i*11+j;
+   String t = Integer.toString(s);
+   fill(0);
+   text(t, i*between, j*between+24);
+   }
+   }*/
   float s =frameRate;
   String t = Float.toString(s);
   fill(0);
