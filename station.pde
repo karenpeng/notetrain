@@ -25,7 +25,7 @@ class Station {
     countPlus=0;
     //dis = dist(mouseX, mouseY, _x, _y);
     lastX=_x;
-    lastY=_y-32;
+    lastY=_y-30;
     counter=0;
     isTransferStation=false;
     ang=0;
@@ -40,10 +40,10 @@ class Station {
       on = !on;
     }
     if (on) {
-      d=d+countPlus*.2;
+     // d=d+countPlus*.2;
     }
     else {
-      d=22;
+     // d=22;
     }
   }
 
@@ -60,9 +60,9 @@ class Station {
       hover = false;
     }
   }
-
+/*
   void pitch() {
-    if (hover /*&& mousePressed*/) {
+    if (hover ) {
       float pitch1=dist(mouseX, mouseY, x-d, y);
       float pitch2=dist(mouseX, mouseY, x+d, y);
       if (pitch1<d/4) {
@@ -73,7 +73,7 @@ class Station {
       }
       println(d);
     }
-  }
+  }*/
 
   boolean trigger(PVector p) {
     //if (on) {
@@ -104,8 +104,8 @@ class Station {
       //println(intersect);
       if (intersectDis<=30) {
         //println("yeah");
-        lastX=x+32*(mouseX-x)/ intersectDis;
-        lastY=y+32*(mouseY-y)/ intersectDis;
+        lastX=x+30*(mouseX-x)/ intersectDis;
+        lastY=y+30*(mouseY-y)/ intersectDis;
       }
     }
   }
@@ -131,6 +131,7 @@ class Station {
         //println(dd);
       }
       pushMatrix();
+      fill(0);
       translate(lastX, lastY);
       rotate(ang);
       beginShape();    
@@ -153,23 +154,23 @@ class Station {
         text(t, x, y+5);
       }
       if (hover) {
-        fill(c);
+        fill(0);
         ellipse(x, y, d, d);
         fill(255);
         String t = Integer.toString(countPlus);
-        text(t, x, y+5);
+        text(t, x, y+5);/*
         fill(0);
         ellipse(x-d, y, d/2, d/2);
         ellipse(x+d, y, d/2, d/2);
         fill(255);
         text("+", x-d, y+5);
-        text("-", x+d, y+5);
+        text("-", x+d, y+5);*/
       }
       if (trigger) {
-        //d=30;
+        d=30;
       }
       if (!trigger) {
-        //d=25;
+        d=25;
       }
     }
     if (!on) {

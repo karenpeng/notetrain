@@ -85,8 +85,8 @@ void setup() {
   initLine(lineSix, s6);
 
   s.get(37).intersect=true;
-    s.get(37).a=3*PI/2;
-    s.get(37).b=2*PI;
+  s.get(37).a=3*PI/2;
+  s.get(37).b=2*PI;
   s.get(38).intersect=true;  
   s.get(60).intersect=true;
   s.get(71).intersect=true;
@@ -131,31 +131,32 @@ void draw() {
 
   // note pick which train to get on
   // if already in a train, return null
-
-  for (Line ll:l) {
-    for (Station station:ll.stations) {
-      float dis=dist(station.x, station.y, n.x, n.y);
-      if (!n.attach && dis<n.d) {
-        Train t = n.pickTrain(ll, station);
-        if (t != null) {
-          t.getOn(n);
-          break;
+  if (!mousePressed) {
+    for (Line ll:l) {
+      for (Station station:ll.stations) {
+        float dis=dist(station.x, station.y, n.x, n.y);
+        if (!n.attach && dis<n.d) {
+          Train t = n.pickTrain(ll, station);
+          if (t != null) {
+            t.getOn(n);
+            break;
+          }
         }
       }
     }
   }
   n.jigger();
   n.appear();    
-/*
+  /*
   for (int i=0; i<=14; i++) {
-    for (int j=0; j<12; j++) {
-      int s =i*11+j;
-      String t = Integer.toString(s);
-      fill(0);
-      text(t, i*between, j*between+24);
-    }
-  }
-  */
+   for (int j=0; j<12; j++) {
+   int s =i*11+j;
+   String t = Integer.toString(s);
+   fill(0);
+   text(t, i*between, j*between+24);
+   }
+   }
+   */
   float s =frameRate;
   String t = Float.toString(s);
   fill(0);
