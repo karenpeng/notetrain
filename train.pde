@@ -85,6 +85,11 @@ class Train {
     }
   }
 
+  boolean atStation(Station station) {
+    float distance = dist(station.x, station.y, pos.x, pos.y);
+    return distance < 3;
+  }
+
   void getOn(Note n) {
     notes.add(n);
   }

@@ -5,7 +5,6 @@ ArrayList<Station> s3;
 ArrayList<Station> s4;
 ArrayList<Station> s5;
 ArrayList<Station> s6;
-ArrayList<Train>t;
 ArrayList<Line>l;
 int between;
 
@@ -77,12 +76,12 @@ void setup() {
   }
   //////////////////////////////////////////////////////////////////////////////
 
-  l.add( new Line(s1, t, color (255, 0, 255)));
-  l.add( new Line(s2, t, color (0, 255, 255)));
-  l.add( new Line(s3, t, color (10, 255, 10)));
-  l.add( new Line(s4, t, color (255, 10, 10)));
-  l.add( new Line(s5, t, color (20, 20, 255)));
-  l.add( new Line(s6, t, color (255, 255, 0)));
+  l.add( new Line(s1, color (255, 0, 255)));
+  l.add( new Line(s2, color (0, 255, 255)));
+  l.add( new Line(s3, color (10, 255, 10)));
+  l.add( new Line(s4, color (255, 10, 10)));
+  l.add( new Line(s5, color (20, 20, 255)));
+  l.add( new Line(s6, color (255, 255, 0)));
   println(s.size());
 }
 
@@ -100,19 +99,22 @@ void draw() {
   }
 
   // note pick which train to get on
-  // if already in a trian, return null
+  // if already in a train, return null
 
   for (Line ll:l) {
-    float dis=dist(ll.stations.get(0).x, ll.stations.get(0).y, n.x, n.y);
-    if (!n.attach && dis<n.d) {
-      Train t = n.pickTrain(ll);
-      if (t != null) {
-        t.getOn(n);
+    for (Station station:ll.stations) {
+      float dis=dist(station.x, station.y, n.x, n.y);
+      if (!n.attach && dis<n.d) {
+        Train t = n.pickTrain(ll, station);
+        if (t != null) {
+          t.getOn(n);
+          break;
+        }
       }
     }
-    n.jigger();
-    n.appear();
   }
+  n.jigger();
+  n.appear();    
   /*
   for (int i=0; i<=14; i++) {
    for (int j=0; j<12; j++) {

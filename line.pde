@@ -5,9 +5,9 @@ class Line {
   int maxTrainNums;
   Station start;
 
-  Line(ArrayList<Station> _s, ArrayList<Train> _t, color _c) {
+  Line(ArrayList<Station> _s, color _c) {
     stations=_s;
-    trains=_t;
+    trains=new ArrayList<Train>();
     c = _c;
     maxTrainNums = 20;
    // start = _s.get(0);
