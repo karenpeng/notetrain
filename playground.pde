@@ -181,8 +181,6 @@ void mouseDragged() {
 void keyPressed() {
   if (key=='j') {
     n.jump();
-    n.x=50;
-    n.y= height-50;
   }
 }
 
