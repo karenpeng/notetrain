@@ -5,7 +5,8 @@ class Note {
   Line lastLine;    //record the last line
   int passedStation=0;
   boolean sound;
-  Train t;
+  Train t;     //the note at witch train
+  Station getOnStation;   //station which the note get on the train
   int counter;
   boolean blink;
   int counterB;
@@ -50,8 +51,12 @@ class Note {
         if (ll.trains.get(i).atStation(station)) {
           attach=true;
           lastLine = ll;
-          if (t==null) {
-            t=ll.trains.get(i);
+          t=ll.trains.get(i);
+          //only record get on station at first time
+          //when tranfer, do not record it
+          //when jump, set getOnStation = null
+          if (getOnStation == null) {
+            getOnStation = station;
           }
           return ll.trains.get(i);
         }
@@ -97,19 +102,25 @@ class Note {
   void unfollow() {
     attach = false;
     passedStation = 0;
-    x=lastLine.stations.get(0).x;
-    y=lastLine.stations.get(0).y;
+    x=getOnStation.x;
+    y=getOnStation.y;
   }
 
   void jump() {
     attach = false;
     passedStation = 0;
-    for (int i=0; i<t.notes.size();i++) {
-      if (t.notes.get(i)==this) {
+    //clear get on station
+    getOnStation = null;
+    //remove this note from the train 
+    for (int i = 0; i < t.notes.size(); i++) {
+      if (t.notes.get(i) == this) {
         t.notes.remove(i);
       }
     }
-    t=null;
+    //put these here will be better?
+    x=50;
+    y= height-50;    
+    t = null;
   }
 
   void appear() {
