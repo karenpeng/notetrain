@@ -11,7 +11,9 @@ ArrayList<Line>l;
 int between;
 
 Note n;
-
+String [] melody= {
+  "C3", "D3", "E3", "F3", "G3", "A3", "B3", "C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5", "D5", "E5", "F5", "G5", "A5", "B5",
+};
 //record how many line pass by each station
 HashMap<Integer, Integer> stationsMap = new HashMap<Integer, Integer>();
 
@@ -136,7 +138,7 @@ void draw() {
   n.jigger();
   n.sing();
   n.appear();  
-    
+
   /*
   for (int i=0; i<=14; i++) {
    for (int j=0; j<12; j++) {
@@ -155,9 +157,9 @@ void draw() {
 
 void mousePressed() {
   for (Line ll: l) {
-    //ll.clickStation();
+    ll.clickStation();
   }
-  for ( Station ss: s){
+  for ( Station ss: s) {
     ss.onOff();
   }
 }

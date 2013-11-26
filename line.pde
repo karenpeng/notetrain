@@ -51,7 +51,7 @@ class Line {
 
   void showStation() {
     for (Station s: stations) {
-      //s.hover();
+      s.hover();
       s.countTrigger();
       s.display(c);
     }
@@ -59,8 +59,8 @@ class Line {
 
   void clickStation() {
     for (Station s: stations) {
-      s.onOff();
-     // s.pitch();
+      //s.onOff();
+      s.pitch();
     }
   }
 

@@ -54,11 +54,11 @@ class Station {
       hover = false;
     }
   }
-/*
+
   void pitch() {
     if (hover ) {
-      float pitch1=dist(mouseX, mouseY, x-d, y);
-      float pitch2=dist(mouseX, mouseY, x+d, y);
+      float pitch1=dist(mouseX, mouseY, x+d, y);
+      float pitch2=dist(mouseX, mouseY, x-d, y);
       if (pitch1<d/4) {
         countPlus+=1;
       }
@@ -67,7 +67,7 @@ class Station {
       }
       println(d);
     }
-  }*/
+  }
 
   boolean trigger(PVector p) {
     //if (on) {
@@ -142,29 +142,34 @@ class Station {
       noStroke();
       if (!hover) {
         fill(0);
-        ellipse(x, y, d, d);
+        ellipse(x, y, d+4, d+4);
         fill(255);
-        String t = Integer.toString(countPlus);
-        text(t, x, y+5);
+        int whichKey=7+countPlus;
+        whichKey=constrain(whichKey, 0, 23);
+        text(melody[whichKey], x, y+5);
       }
       if (hover) {
         fill(0);
-        ellipse(x, y, d, d);
+        ellipse(x, y, d+4, d+4);
         fill(255);
-        String t = Integer.toString(countPlus);
-        text(t, x, y+5);/*
+        int whichKey=7+countPlus;
+        whichKey=constrain(whichKey, 0, 23);
+        text(melody[whichKey], x, y+5);
         fill(0);
         ellipse(x-d, y, d/2, d/2);
         ellipse(x+d, y, d/2, d/2);
         fill(255);
-        text("+", x-d, y+5);
-        text("-", x+d, y+5);*/
+        text("-", x-d, y+5);
+        text("+", x+d, y+5);
       }
       if (trigger) {
-        d=25;
+       // d=25;
       }
-      if (!trigger) {
-        d=20;
+      if (!trigger&&on) {
+       // d=22;
+      }
+      if (!trigger&&!on) {
+      //  d=20;
       }
     }
     if (!on) {

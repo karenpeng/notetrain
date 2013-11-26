@@ -115,7 +115,7 @@ class Note {
     stroke(0);
     fill(255); 
     if (blink) {
-      ellipse(x, y, d+10, d+10);
+      ellipse(x, y, d+8, d+8);
     }
     else {
       ellipse(x, y, d, d);
