@@ -50,7 +50,9 @@ class Note {
         if (ll.trains.get(i).atStation(station)) {
           attach=true;
           lastLine = ll;
-          t=ll.trains.get(i);
+          if (t==null) {
+            t=ll.trains.get(i);
+          }
           return ll.trains.get(i);
         }
       }
@@ -62,19 +64,13 @@ class Note {
     if (attach) {
       for (Station s:lastLine.stations) {
         if (s.trigger(t.pos) && s.on) {
+          out.playNote(s.tone);
           sound=true;
           blink=true;
         }
       }
       println(sound);
-    }/*
-    if(sound){
-     counter++;
-     }
-     if(counter>1){
-     sound=false;
-     counter=0;
-     }*/
+    }
 
     if (counter>0) {
       sound=false;
@@ -108,6 +104,12 @@ class Note {
   void jump() {
     attach = false;
     passedStation = 0;
+    for (int i=0; i<t.notes.size();i++) {
+      if (t.notes.get(i)==this) {
+        t.notes.remove(i);
+      }
+    }
+    t=null;
   }
 
   void appear() {

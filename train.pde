@@ -15,8 +15,8 @@ class Train {
     pos=_p;
     vel=new PVector (0.0, 0.0);
     acc=new PVector (0, 0);
-    maxspeed = 3;
-    maxforce = 2;
+    maxspeed = 4;
+    maxforce = 4;
     d=20;
     c=_c;
     history = new ArrayList<PVector>();

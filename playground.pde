@@ -1,4 +1,9 @@
 import java.util.Map; 
+import ddf.minim.*;
+import ddf.minim.ugens.*;
+
+Minim minim;
+AudioOutput out;
 
 ArrayList<Station> s;
 ArrayList<Station> s1;
@@ -34,6 +39,8 @@ void initLine(int [] line, ArrayList<Station> stations) {
 
 void setup() {
   size(900, 700);
+    minim = new Minim(this);
+  out = minim.getLineOut();
   frameRate(40);
   textAlign(CENTER);
   between=60;

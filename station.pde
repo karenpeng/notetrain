@@ -13,6 +13,8 @@ class Station {
   float ang;
   float a, b;
   //color c;
+  int whichKey;
+  String tone;
 
   Station(float _x, float _y) {
     x=_x;
@@ -23,6 +25,9 @@ class Station {
     trigger=false;
     intersect=false;
     countPlus=0;
+    // whichKey=7+countPlus;
+    //whichKey=constrain(whichKey, 0, 23);
+    //tone=melody[whichKey];
     //dis = dist(mouseX, mouseY, _x, _y);
     lastX=_x;
     lastY=_y-30;
@@ -65,8 +70,11 @@ class Station {
       if (pitch2<d/4) {
         countPlus-=1;
       }
-      println(d);
-    }
+      println(countPlus+whichKey);
+    }   
+    whichKey=7+countPlus;
+    whichKey=constrain(whichKey, 0, 23);
+    tone=melody[whichKey];
   }
 
   boolean trigger(PVector p) {
@@ -144,17 +152,17 @@ class Station {
         fill(0);
         ellipse(x, y, d+4, d+4);
         fill(255);
-        int whichKey=7+countPlus;
-        whichKey=constrain(whichKey, 0, 23);
-        text(melody[whichKey], x, y+5);
+        //whichKey=7+countPlus;
+        //whichKey=constrain(whichKey, 0, 23);
+        text(tone, x, y+5);
       }
       if (hover) {
         fill(0);
         ellipse(x, y, d+4, d+4);
         fill(255);
-        int whichKey=7+countPlus;
-        whichKey=constrain(whichKey, 0, 23);
-        text(melody[whichKey], x, y+5);
+        //int whichKey=7+countPlus;
+        //whichKey=constrain(whichKey, 0, 23);
+        text(tone, x, y+5);
         fill(0);
         ellipse(x-d, y, d/2, d/2);
         ellipse(x+d, y, d/2, d/2);
@@ -163,13 +171,13 @@ class Station {
         text("+", x+d, y+5);
       }
       if (trigger) {
-       // d=25;
+        // d=25;
       }
       if (!trigger&&on) {
-       // d=22;
+        // d=22;
       }
       if (!trigger&&!on) {
-      //  d=20;
+        //  d=20;
       }
     }
     if (!on) {
