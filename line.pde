@@ -1,6 +1,6 @@
 class Line {
-  ArrayList<Station> stations/*= new ArrayList<Station>()*/;
-  ArrayList<Train> trains/*= new ArrayList<Train>()*/;
+  ArrayList<Station> stations;
+  ArrayList<Train> trains;
   color c;
   int maxTrainNums;
   Station start;
@@ -9,8 +9,8 @@ class Line {
     stations=_s;
     trains=new ArrayList<Train>();
     c = _c;
-    maxTrainNums = 20;
-   // start = _s.get(0);
+    maxTrainNums = 15;
+   //start = _s.get(0);
   }
 
   void addTrain() {
@@ -66,7 +66,7 @@ class Line {
 
   void dragStation() {
     for (Station s: stations) {
-      s.intersect();
+      s.direct();
     }
   }
 

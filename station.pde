@@ -17,7 +17,7 @@ class Station {
   Station(float _x, float _y) {
     x=_x;
     y=_y;
-    d=22;
+    d=20;
     hover=false;
     on=false;
     trigger=false;
@@ -36,14 +36,8 @@ class Station {
 
   void onOff() {  
     dis = dist(mouseX, mouseY, x, y);
-    if (/*mousePressed && */dis<=d/2) {  
+    if (dis<=d*.6) {  
       on = !on;
-    }
-    if (on) {
-     // d=d+countPlus*.2;
-    }
-    else {
-     // d=22;
     }
   }
 
@@ -98,7 +92,7 @@ class Station {
     }
   }
 
-  void intersect() {
+  void direct() {
     if (intersect) {
       float intersectDis = dist(x, y, mouseX, mouseY);
       //println(intersect);
@@ -167,10 +161,10 @@ class Station {
         text("-", x+d, y+5);*/
       }
       if (trigger) {
-        d=30;
+        d=25;
       }
       if (!trigger) {
-        d=25;
+        d=20;
       }
     }
     if (!on) {

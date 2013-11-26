@@ -38,7 +38,7 @@ class Train {
     //move the passengers
     for (Note n: notes) {
       n.follow(pos);
-    }    
+    }
   }
 
   void appF(PVector f) {
@@ -74,7 +74,7 @@ class Train {
       PVector lastHis = (PVector)history.get(0);
       float distance = dist(next.x, next.y, lastHis.x, lastHis.y);
       if (distance < 1) {
-        arrived = true;
+        arrived = true;      
         for (int i = 0; i < notes.size(); i++) {
           (notes.get(i)).unfollow();//get down the train
           notes.remove(i);
@@ -83,31 +83,32 @@ class Train {
     }
     if (nextIndex < stations.size() - 1 && next.trigger(pos)) {
       //each passager.passedStation + 1
+
       for (Note n : notes) {
         n.passedStation++;
       }
       if (stations.get(nextIndex).isTransferStation) {
         //try to transfer
-       // transfer();
+        // transfer();
       }
       nextIndex++;
     }
   }
-/*
+  /*
   //let passager's transfer
-  void transfer() {
-    for (int i = 0; i < notes.size(); i++) {
-      //TODO: change the transfer rate
-      if (random(0, 1) < 1) {
-        Note n = notes.get(i);
-        if (n.passedStation > 1) {
-          notes.get(i).unfollow();
-          notes.remove(i);  
-        }
-      }
-    }
-  }
-*/
+   void transfer() {
+   for (int i = 0; i < notes.size(); i++) {
+   //TODO: change the transfer rate
+   if (random(0, 1) < 1) {
+   Note n = notes.get(i);
+   if (n.passedStation > 1) {
+   notes.get(i).unfollow();
+   notes.remove(i);  
+   }
+   }
+   }
+   }
+   */
   //check the train arrived the station
   boolean atStation(Station station) {
     float distance = dist(station.x, station.y, pos.x, pos.y);
@@ -122,7 +123,7 @@ class Train {
     stations = _s;
     nextIndex = 0;
   }
-  
+
   void show() {
     noStroke();
     fill(c);
@@ -133,3 +134,4 @@ class Train {
     }
   }
 }
+

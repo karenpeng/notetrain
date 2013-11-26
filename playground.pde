@@ -1,6 +1,6 @@
 import java.util.Map; 
 
-ArrayList<Station>s;
+ArrayList<Station> s;
 ArrayList<Station> s1;
 ArrayList<Station> s2;
 ArrayList<Station> s3;
@@ -43,7 +43,7 @@ void setup() {
   s5 = new ArrayList<Station>();
   s6 = new ArrayList<Station>();
   l=new ArrayList<Line>();
-  n= new Note(50, height-50);
+  n= new Note(50, height-40);
 
   ////////////////////////////////////////////////////////////
   for (int i=0; i<=width; i+=between) {
@@ -55,53 +55,41 @@ void setup() {
   ///////////////////////////////////////////////////////////
 
   int [] lineOne = {
-    21, 20, 30, 41, 52, 51, 40, 39, 38, 37, 36, 25, 24, 23, 22, 22
+    21, 20, 30, 41, 52, 51, 40, 39, 38, 37, 36, 25, 24, 23, 22
   };
   initLine(lineOne, s1);
 
   int [] lineTwo = {
-    164, 163, 162, 161, 160, 149, 138, 127, 116, 105, 94, 83, 72, 61, 60, 59, 48, 37, 26, 15, 14, 13, 12, 1, 1
+    164, 163, 162, 161, 160, 149, 138, 127, 116, 105, 94, 83, 72, 61, 60, 59, 48, 37, 26, 15, 14, 13, 12, 1
   };
   initLine(lineTwo, s2);
 
   int [] lineThree = {
-    43, 54, 65, 76, 75, 74, 73, 72, 71, 70, 69, 68, 78, 88, 88
+    43, 54, 65, 76, 75, 74, 73, 72, 71, 70, 69, 68, 78, 88
   };
   initLine(lineThree, s3);
 
   int [] lineFour = {
-    120, 119, 118, 117, 116, 115, 114, 113, 112, 100, 88, 88
+    120, 119, 118, 117, 116, 115, 114, 113, 112, 100, 88
   };
   initLine(lineFour, s4);
 
   int [] lineFive = {
-    155, 144, 145, 146, 135, 124, 113, 102, 91, 92, 93, 82, 71, 60, 49, 38, 27, 17, 7, 7
+    155, 144, 145, 146, 135, 124, 113, 102, 91, 92, 93, 82, 71, 60, 49, 38, 27, 17, 7
   };
   initLine(lineFive, s5);
 
   int [] lineSix = {
-    159, 148, 137, 126, 115, 104, 93, 94, 95, 96, 107, 118, 129, 140, 141, 153, 153
+    159, 148, 137, 126, 115, 104, 93, 94, 95, 96, 107, 118, 129, 140, 141, 153
   };
   initLine(lineSix, s6);
 
-  s.get(37).intersect=true;
-  s.get(37).a=3*PI/2;
-  s.get(37).b=2*PI;
-  s.get(38).intersect=true;  
-  s.get(60).intersect=true;
-  s.get(71).intersect=true;
-  s.get(72).intersect=true;
-  s.get(93).intersect=true;
-  s.get(94).intersect=true;
-  s.get(113).intersect=true;
-  s.get(115).intersect=true;
-  s.get(116).intersect=true;
-  s.get(118).intersect=true;
 
   for (Map.Entry me : stationsMap.entrySet()) {
     //if more than one line pass by, set this station to a transfer station
     if ((Integer)(me.getValue()) > 1) {
       s.get((Integer)(me.getKey())).isTransferStation = true;
+      s.get((Integer)(me.getKey())).intersect=true;
     }
   }  
 
@@ -146,7 +134,9 @@ void draw() {
     }
   }
   n.jigger();
-  n.appear();    
+  n.sing();
+  n.appear();  
+    
   /*
   for (int i=0; i<=14; i++) {
    for (int j=0; j<12; j++) {
@@ -165,7 +155,10 @@ void draw() {
 
 void mousePressed() {
   for (Line ll: l) {
-    ll.clickStation();
+    //ll.clickStation();
+  }
+  for ( Station ss: s){
+    ss.onOff();
   }
 }
 
@@ -174,5 +167,13 @@ void mouseDragged() {
     ll.dragStation();
   }
   n.drag();
+}
+
+void keyPressed() {
+  if (key=='j') {
+    n.jump();
+    n.x=50;
+    n.y= height-50;
+  }
 }
 
