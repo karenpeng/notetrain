@@ -14,7 +14,7 @@ ArrayList<Station> s5;
 ArrayList<Station> s6;
 ArrayList<Line>l;
 int between;
-
+ArrayList<Note>notes;
 Note n;
 String [] melody= {
   "C3", "D3", "E3", "F3", "G3", "A3", "B3", "C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5", "D5", "E5", "F5", "G5", "A5", "B5",
@@ -39,7 +39,7 @@ void initLine(int [] line, ArrayList<Station> stations) {
 
 void setup() {
   size(900, 700);
-    minim = new Minim(this);
+  minim = new Minim(this);
   out = minim.getLineOut();
   frameRate(40);
   textAlign(CENTER);
@@ -52,8 +52,11 @@ void setup() {
   s5 = new ArrayList<Station>();
   s6 = new ArrayList<Station>();
   l=new ArrayList<Line>();
-  n= new Note(50, height-40);
-
+  notes=new ArrayList<Note>();
+  //n= new Note(50, height-40);
+  for (int i=0;i<6;i++) {
+    notes.add(new Note(80+i*140, height-40));
+  }
   ////////////////////////////////////////////////////////////
   for (int i=0; i<=width; i+=between) {
     for (int j=0; j<height-between; j+=between) {
@@ -79,7 +82,7 @@ void setup() {
   initLine(lineThree, s3);
 
   int [] lineFour = {
-    120, 119, 118, 117, 116, 115, 114, 113, 112, 100, 88
+    98, 97, 108, 119, 118, 117, 116, 115, 114, 113, 112, 100, 88
   };
   initLine(lineFour, s4);
 
@@ -128,26 +131,27 @@ void draw() {
 
   // note pick which train to get on
   // if already in a train, return null
-  if (!mousePressed) {
-    for (Line ll:l) {
-      for (Station station:ll.stations) {
-        float dis=dist(station.x, station.y, n.x, n.y);
-        if (!n.attach && dis<n.d) {
-          Train t = n.pickTrain(ll, station);
-          if (t != null) {
-            t.getOn(n);
-            break;
+  for (Note n:notes) {
+    if (!mousePressed) {
+      for (Line ll:l) {
+        for (Station station:ll.stations) {
+          float dis=dist(station.x, station.y, n.x, n.y);
+          if (!n.attach && dis<n.d) {
+            Train t = n.pickTrain(ll, station);
+            if (t != null) {
+              t.getOn(n);
+              break;
+            }
           }
         }
       }
     }
+    n.jigger();
+    n.sing();
+    n.appear();
   }
-  n.jigger();
-  n.sing();
-  n.appear();  
-
-  /*
-  for (int i=0; i<=14; i++) {
+  /*  
+   for (int i=0; i<=14; i++) {
    for (int j=0; j<12; j++) {
    int s =i*11+j;
    String t = Integer.toString(s);
@@ -175,12 +179,18 @@ void mouseDragged() {
   for (Line ll: l) {
     ll.dragStation();
   }
-  n.drag();
+  for (Note n:notes) {
+    n.drag();
+  }
 }
 
 void keyPressed() {
   if (key=='j') {
-    n.jump();
+    for (int i=0;i<6;i++) {
+      Note n=notes.get(i);
+      n.jump();
+      n.x= 80+i*140;
+    }
   }
 }
 

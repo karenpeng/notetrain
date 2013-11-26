@@ -11,6 +11,7 @@ class Note {
   boolean blink;
   int counterB;
   boolean still;
+  Station song;
 
   Note(float _x, float _y) {
     x=_x;
@@ -72,9 +73,9 @@ class Note {
           out.playNote(s.tone);
           sound=true;
           blink=true;
+          song=s;
         }
       }
-      println(sound);
     }
 
     if (counter>0) {
@@ -82,6 +83,8 @@ class Note {
       counter=0;
     }
     if (sound) {
+      out.playNote(song.tone);
+      println("dfhs");
       counter++;
     }
     if (blink) {
@@ -102,8 +105,8 @@ class Note {
   void unfollow() {
     attach = false;
     passedStation = 0;
-    x=getOnStation.x;
-    y=getOnStation.y;
+    x=lastLine.stations.get(0).x;
+    y=lastLine.stations.get(0).y;
   }
 
   void jump() {
@@ -118,7 +121,7 @@ class Note {
       }
     }
     //put these here will be better?
-    x=50;
+    //x=50;
     y= height-50;    
     t = null;
   }
