@@ -10,7 +10,6 @@ class Line {
     trains=new ArrayList<Train>();
     c = _c;
     maxTrainNums = 15;
-   //start = _s.get(0);
   }
 
   void addTrain() {

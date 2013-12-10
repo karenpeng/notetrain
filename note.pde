@@ -12,10 +12,13 @@ class Note {
   int counterB;
   boolean still;
   Station song;
+  float orX, orY;
 
   Note(float _x, float _y) {
     x=_x;
     y=_y;
+    orX=_x;
+    orY=_y;
     d=30;
     attach=false;
     sound=false;
@@ -115,14 +118,14 @@ class Note {
     //clear get on station
     getOnStation = null;
     //remove this note from the train 
-    for (int i = 0; i < t.notes.size(); i++) {
+    for (int i = 0; i < t.notes.size()-1; i++) {
       if (t.notes.get(i) == this) {
         t.notes.remove(i);
       }
     }
     //put these here will be better?
-    //x=50;
-    y= height-50;    
+    x=orX;
+    y= orY;    
     t = null;
   }
 

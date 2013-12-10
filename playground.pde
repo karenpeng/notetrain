@@ -55,7 +55,7 @@ void setup() {
   notes=new ArrayList<Note>();
   //n= new Note(50, height-40);
   for (int i=0;i<6;i++) {
-    notes.add(new Note(80+i*140, height-40));
+    notes.add(new Note(90+i*140, height-40));
   }
   ////////////////////////////////////////////////////////////
   for (int i=0; i<=width; i+=between) {
@@ -186,10 +186,10 @@ void mouseDragged() {
 
 void keyPressed() {
   if (key=='j') {
-    for (int i=0;i<6;i++) {
-      Note n=notes.get(i);
-      n.jump();
-      n.x= 80+i*140;
+    for (Note n :notes) {
+      if (n.attach) {
+        n.jump();
+      }
     }
   }
 }

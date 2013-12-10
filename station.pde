@@ -14,6 +14,7 @@ class Station {
   float a, b;
   //color c;
   int whichKey;
+  int constrainKey;
   String tone;
 
   Station(float _x, float _y) {
@@ -25,10 +26,6 @@ class Station {
     trigger=false;
     intersect=false;
     countPlus=0;
-    // whichKey=7+countPlus;
-    //whichKey=constrain(whichKey, 0, 23);
-    //tone=melody[whichKey];
-    //dis = dist(mouseX, mouseY, _x, _y);
     lastX=_x;
     lastY=_y-30;
     counter=0;
@@ -51,10 +48,7 @@ class Station {
     if (on && !mousePressed && dis<=d) {
       //d=25;
       hover = true;
-    } /*
-    else {
-     hover = false;
-     }*/
+    } 
     if (hover && dis>d*2) {
       hover = false;
     }
@@ -73,8 +67,8 @@ class Station {
       println(countPlus+whichKey);
     }   
     whichKey=7+countPlus;
-    whichKey=constrain(whichKey, 0, 23);
-    tone=melody[whichKey];
+    constrainKey=constrain(whichKey, 0, 20);
+    tone=melody[constrainKey];
   }
 
   boolean trigger(PVector p) {
@@ -115,22 +109,16 @@ class Station {
 
   void display(color c) {
     textAlign(CENTER);
-    //println(dis);
-    //fill(0);    
 
     if (intersect) {
       //lastX=constrain(lastX,x-d,x);
       if (lastX-x>=0) {
         float dd = asin((lastY-y)/dist(lastX, lastY, x, y));
         ang=map(dd, -PI/2, PI/2, 0, PI);
-        //println("right"+ang+" "+dd);
-        //println(dd);
       }
       else {
         float dd = asin((lastY-y)/dist(lastX, lastY, x, y));
         ang=map(dd, PI/2, -PI/2, PI, PI*2);
-        //println("left"+ang+" "+dd);
-        //println(dd);
       }
       pushMatrix();
       fill(0);
@@ -152,16 +140,12 @@ class Station {
         fill(0);
         ellipse(x, y, d+4, d+4);
         fill(255);
-        //whichKey=7+countPlus;
-        //whichKey=constrain(whichKey, 0, 23);
         text(tone, x, y+5);
       }
       if (hover) {
         fill(0);
         ellipse(x, y, d+4, d+4);
         fill(255);
-        //int whichKey=7+countPlus;
-        //whichKey=constrain(whichKey, 0, 23);
         text(tone, x, y+5);
         fill(0);
         ellipse(x-d, y, d/2, d/2);
@@ -181,15 +165,9 @@ class Station {
       }
     }
     if (!on) {
-      //strokeWeight(2);
-      //stroke(c);
       noStroke();
       fill(0);
-      //noFill();
       ellipse(x, y, d, d);
-      //fill(255);
-      //textSize(10);
-      //text("off", x, y+5);
     }
   }
 }

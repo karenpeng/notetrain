@@ -70,15 +70,16 @@ class Train {
     if (nextIndex == stations.size() - 1) {
       if (!headArrived && next.trigger(pos)) {
         headArrived = true;
+                for (int i = 0; i < notes.size(); i++) {
+          (notes.get(i)).unfollow();//get down the train
+          notes.remove(i);
+        }
       }
       PVector lastHis = (PVector)history.get(0);
       float distance = dist(next.x, next.y, lastHis.x, lastHis.y);
       if (distance < 1) {
         arrived = true;      
-        for (int i = 0; i < notes.size(); i++) {
-          (notes.get(i)).unfollow();//get down the train
-          notes.remove(i);
-        }
+
       }
     }
     if (nextIndex < stations.size() - 1 && next.trigger(pos)) {
